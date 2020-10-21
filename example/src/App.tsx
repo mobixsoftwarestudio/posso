@@ -1,10 +1,13 @@
 import React from 'react'
 
-import { ExampleComponent } from 'posso'
-import 'posso/dist/index.css'
+import { CheckPermission } from 'posso'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return (
+    <CheckPermission allPermissions={['test/create']} permissions={['test/edit']}>
+      <span>OI</span>
+    </CheckPermission>
+  )
 }
 
-export default App
+export default App;
