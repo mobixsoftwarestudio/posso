@@ -4,23 +4,39 @@
  *
  */
 import React from 'react';
+import { useAuthorize } from '../hooks/useAuthorize';
+import { Permissions } from '../types';
 
-type Props = {
-  permissions: Array<string>;
-  allPermissions: Array<string>;
+type Props = Permissions & {
   alternateView?: JSX.Element | null;
 };
 
-const Can: React.FC<Props> = ({ children, permissions, allPermissions, alternateView }) => (
+const Can: React.FC<Props> = ({
+  children,
+  permissions,
+  authorizationStrategy,
+  alternateView,
+}) => (
   <React.Fragment>
-    {allPermissions.find(state => permissions.includes(state)) ? (
+    {useAuthorize(permissions, authorizationStrategy) ? (
       <React.Fragment>{children}</React.Fragment>
-    ) : alternateView}
+    ) : (
+      alternateView
+    )}
   </React.Fragment>
-)
+);
 
-export const CheckPermission: React.FC<Props> = ({ children, permissions, allPermissions, alternateView = null }) => (
-  <Can permissions={permissions} allPermissions={allPermissions} alternateView={alternateView}>
+export const CheckPermission: React.FC<Props> = ({
+  children,
+  permissions,
+  authorizationStrategy,
+  alternateView = null,
+}) => (
+  <Can
+    permissions={permissions}
+    authorizationStrategy={authorizationStrategy}
+    alternateView={alternateView}
+  >
     {children}
   </Can>
 );
