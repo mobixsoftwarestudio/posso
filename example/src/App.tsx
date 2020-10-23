@@ -6,6 +6,7 @@ import Home from './screens/Home';
 import About from './screens/About';
 import Contact from './screens/Contact';
 import Login from './screens/Login';
+import ForgotPassword from './screens/ForgotPassword';
 
 const App = () => {
   const permissionsOfApp = ['page/home'];
@@ -24,6 +25,7 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path={'/'} component={Login} />
+          <Route exact path={'/forgot-password'} component={ForgotPassword} />
           <PossoRoute exact path={'/home'} component={Home} permissions={['page/home']} />
           <PossoRoute exact path={'/about'} component={About} permissions={['page/about']} notAllowedComponent={<NotAllowedComponent />} />
           <PossoRoute exact path={'/contact'} component={Contact} permissions={['page/contact']} />

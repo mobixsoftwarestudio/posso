@@ -12,7 +12,7 @@ import { useAuthorize } from '../hooks/useAuthorize';
 import { usePermissions } from '../hooks/usePermissions';
 import { Permissions, PossoRouteProps } from '../types';
 
-const NotAllowedPage = () => {
+const DefaultNotAllowedPage = () => {
   return (
     <div>
       <h2>You're not allowed to see this page.</h2>
@@ -37,24 +37,36 @@ export const PossoRoute: React.FC<Props> = ({
     notAuthenticatedRedirect: redirect,
   } = usePermissions();
 
-  const renderComponent = (props: RouteComponentProps<any, any, unknown>) => {
+  const handleNotAuthorized = () => {
+    if (notAllowedComponent) {
+      return notAllowedComponent;
+    }
+
+    return <DefaultNotAllowedPage />;
+  };
+
+  const handleRenderComponent = (
+    props: RouteComponentProps<any, any, unknown>,
+  ) => {
+    if (Component) {
+      return <Component {...props} />;
+    }
+    return render;
+  };
+
+  const handleCheckAuthorization = (
+    props: RouteComponentProps<any, any, unknown>,
+  ) => {
     if (isAuthenticated) {
       if (!isAuthorized) {
-        if (notAllowedComponent) {
-          return notAllowedComponent;
-        }
-
-        return <NotAllowedPage />;
+        return handleNotAuthorized();
       }
 
-      if (Component) {
-        return <Component {...props} />;
-      }
-      return render;
+      return handleRenderComponent(props);
     }
 
     return redirect;
   };
 
-  return <Route exact={exact} path={path} render={renderComponent} />;
+  return <Route exact={exact} path={path} render={handleCheckAuthorization} />;
 };
