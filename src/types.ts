@@ -5,6 +5,18 @@ type Permissions = {
   authorizationStrategy?: AuthorizationStrategy<any, any>;
 };
 
-type PossoProviderProps = Permissions;
+type PossoProviderProps = Permissions & {
+  isAuthenticated?: boolean;
+  notAuthenticatedRedirect?: JSX.Element;
+};
 
-export { Permissions, PossoProviderProps, AuthorizationStrategy };
+type PossoRouteProps = {
+  notAllowedComponent?: JSX.Element;
+};
+
+export {
+  Permissions,
+  PossoProviderProps,
+  AuthorizationStrategy,
+  PossoRouteProps,
+};
