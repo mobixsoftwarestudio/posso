@@ -10,6 +10,10 @@ export const useAuthorize = (
     authorizationStrategy: providerStrategy,
   } = usePermissions();
 
+  if (requirements.length === 0) {
+    return true;
+  }
+
   const defaultStrategy = () => {
     return !!permissions.find(state => requirements.includes(state));
   };

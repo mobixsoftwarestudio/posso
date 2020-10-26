@@ -7,10 +7,10 @@
  */
 
 import React from 'react';
-import { Route, RouteComponentProps, RouteProps } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import { useAuthorize } from '../hooks/useAuthorize';
 import { usePermissions } from '../hooks/usePermissions';
-import { Permissions, PossoRouteProps } from '../types';
+import { PossoRouteProps } from '../types';
 
 const DefaultNotAllowedPage = () => {
   return (
@@ -20,21 +20,23 @@ const DefaultNotAllowedPage = () => {
   );
 };
 
-type Props = RouteProps & Permissions & PossoRouteProps;
+type Props = RouteProps & PossoRouteProps;
 
 export const PossoRoute: React.FC<Props> = ({
   path,
   exact,
   render,
   component: Component,
-  permissions,
+  permissions = [],
   authorizationStrategy,
   notAllowedComponent,
+  isPrivate,
 }) => {
   const isAuthorized = useAuthorize(permissions, authorizationStrategy);
   const {
     isAuthenticated,
     notAuthenticatedRedirect: redirect,
+    authenticatedRedirect,
   } = usePermissions();
 
   const handleNotAuthorized = () => {
@@ -54,12 +56,36 @@ export const PossoRoute: React.FC<Props> = ({
     return render;
   };
 
+  const handleAuthenticatedRedirect = (
+    props: RouteComponentProps<any, any, unknown>,
+  ) => {
+      return (
+        <Redirect to={{
+            pathname: authenticatedRedirect,
+            state: { from: props.location },
+          }}
+        />
+      )
+  }
+
   const handleCheckAuthorization = (
     props: RouteComponentProps<any, any, unknown>,
   ) => {
     if (isAuthenticated) {
-      if (!isAuthorized) {
+      if (!isAuthorized && isPrivate) {
         return handleNotAuthorized();
+      }
+
+      if(!isPrivate) {
+        return handleAuthenticatedRedirect(props);
+      }
+
+      return handleRenderComponent(props);
+    }
+
+    if (!isPrivate) {
+      if(isAuthenticated) {
+        return handleAuthenticatedRedirect(props);
       }
 
       return handleRenderComponent(props);
