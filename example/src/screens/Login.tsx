@@ -1,13 +1,15 @@
 import React, { FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const history = useHistory();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    sessionStorage.setItem('exampleToken', 'token');
-    window.location.replace('/home');
+    localStorage.setItem('exampleToken', 'token');
+    history.push('/home');
   }
 
   return (
