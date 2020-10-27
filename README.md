@@ -117,7 +117,6 @@ The component accepts the following props:
 |**`authenticatedRedirect`**|string| authenticatedRedirect used to redirect a page when user is logged and access not private page.
 |**`permissions`**|string[]| permissions used to wrap all project with all permissions of user.
 |**`authorizationStrategy`**|func| authorizationStrategy used to define your own rule to check permissions.
-|
 
 
 #### &lt;PossoRoute />
@@ -130,7 +129,6 @@ The component accepts the following props:
 |**`notAllowedComponent`**|JSX.Element| It is used to show a custom component when the user is not allowed to view a specific page.
 |**`permissions`**|string[]| It is used to say what permissions are required to view the page./
 |**`authorizationStrategy`**|func| authorizationStrategy used to define your own rule to check permissions.
-|
 
 #### &lt;CheckPermission />
 
@@ -140,7 +138,6 @@ The component accepts the following props:
 |:--:|:-----|:-----|
 |**`permissions`**|string[]| It is used to say what permissions are required to view the component.
 |**`authorizationStrategy`**|func| authorizationStrategy used to define your own rule to check permissions.
-|
 
 ## License
 Copyright (c) 2020 Mobix Software Studio.
