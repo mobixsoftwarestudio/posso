@@ -12,7 +12,7 @@ type PossoProviderProps = Permissions & {
 };
 
 type PossoRouteProps = {
-  isPrivate: boolean;
+  isPrivate?: boolean;
   notAllowedComponent?: JSX.Element;
   permissions?: Array<string>;
   authorizationStrategy?: AuthorizationStrategy<any, any>;
