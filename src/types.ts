@@ -7,7 +7,7 @@ type Permissions = {
 
 type PossoProviderProps = Permissions & {
   isAuthenticated?: boolean;
-  notAuthenticatedRedirect?: JSX.Element;
+  notAuthenticatedRedirect?: JSX.Element | string;
   authenticatedRedirect?: string;
 };
 

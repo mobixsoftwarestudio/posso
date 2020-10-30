@@ -68,6 +68,18 @@ export const PossoRoute: React.FC<Props> = ({
       )
   }
 
+  const handleNotAuthenticatedRedirect = (
+    props: RouteComponentProps<any, any, unknown>, pathname: string,
+  ) => {
+      return (
+        <Redirect to={{
+            pathname,
+            state: { from: props.location },
+          }}
+        />
+      )
+  }
+
   const handleCheckAuthorization = (
     props: RouteComponentProps<any, any, unknown>,
   ) => {
@@ -89,6 +101,10 @@ export const PossoRoute: React.FC<Props> = ({
       }
 
       return handleRenderComponent(props);
+    }
+
+    if (typeof redirect === 'string') {
+      return handleNotAuthenticatedRedirect(props, redirect);
     }
 
     return redirect;
