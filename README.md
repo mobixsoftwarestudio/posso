@@ -113,7 +113,7 @@ The component accepts the following props:
 |Name|Type|Description
 |:--:|:-----|:-----|
 |**`isAuthenticated`**|boolean|isAuthenticated used to control authenticated routes.
-|**`notAuthenticatedRedirect`**|JSX.Element| notAuthenticatedRedirect used to render/redirect a page when user is not authorized.
+|**`notAuthenticatedRedirect`**|JSX.Element | string| notAuthenticatedRedirect used to render/redirect a page when user is not authorized.
 |**`authenticatedRedirect`**|string| authenticatedRedirect used to redirect a page when user is logged and access not private page.
 |**`permissions`**|string[]| permissions used to wrap all project with all permissions of user.
 |**`authorizationStrategy`**|func| authorizationStrategy used to define your own rule to check permissions.
