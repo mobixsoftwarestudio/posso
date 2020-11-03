@@ -9,7 +9,7 @@
 import React from 'react';
 import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import { useAuthorize } from '../hooks/useAuthorize';
-import { usePermissions } from '../hooks/usePermissions';
+import { usePosso } from '../hooks/usePosso';
 import { PossoRouteProps } from '../types';
 
 const DefaultNotAllowedPage = () => {
@@ -37,7 +37,7 @@ export const PossoRoute: React.FC<Props> = ({
     isAuthenticated,
     notAuthenticatedRedirect: redirect,
     authenticatedRedirect,
-  } = usePermissions();
+  } = usePosso();
 
   const handleNotAuthorized = () => {
     if (notAllowedComponent) {
@@ -56,7 +56,7 @@ export const PossoRoute: React.FC<Props> = ({
     return render;
   };
 
-  const handleAuthenticatedRedirect = (
+  const handleAuthenticationRedirect = (
     props: RouteComponentProps<any, any, unknown>,
   ) => {
       return (
@@ -89,7 +89,7 @@ export const PossoRoute: React.FC<Props> = ({
       }
 
       if(!isPrivate) {
-        return handleAuthenticatedRedirect(props);
+        return handleAuthenticationRedirect(props);
       }
 
       return handleRenderComponent(props);
@@ -97,7 +97,7 @@ export const PossoRoute: React.FC<Props> = ({
 
     if (!isPrivate) {
       if(isAuthenticated) {
-        return handleAuthenticatedRedirect(props);
+        return handleAuthenticationRedirect(props);
       }
 
       return handleRenderComponent(props);

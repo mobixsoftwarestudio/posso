@@ -1,14 +1,17 @@
 import React, { FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+import { usePosso } from 'posso';
 
 const Login: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const history = useHistory();
+  const { handleAuthentication } = usePosso();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     localStorage.setItem('exampleToken', 'token');
+    handleAuthentication();
     history.push('/home');
   }
 

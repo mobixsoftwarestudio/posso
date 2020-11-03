@@ -1,5 +1,5 @@
 import { AuthorizationStrategy } from '../types';
-import { usePermissions } from './usePermissions';
+import { usePosso } from './usePosso';
 
 export const useAuthorize = (
   requirements: Array<string>,
@@ -8,7 +8,7 @@ export const useAuthorize = (
   const {
     permissions,
     authorizationStrategy: providerStrategy,
-  } = usePermissions();
+  } = usePosso();
 
   if (requirements.length === 0) {
     return true;
