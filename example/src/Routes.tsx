@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Switch, Redirect, useLocation } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import { PossoProvider, PossoRoute } from 'posso';
 import Home from './screens/Home';
 import About from './screens/About';
@@ -12,7 +12,6 @@ import ForgotPassword from './screens/ForgotPassword';
 const Routes = () => {
   const permissionsOfApp = ['page/home'];
   const isAuthenticated = React.useCallback(() => localStorage.getItem('exampleToken') !== null, []);
-  const location = useLocation();
   const NotAllowedComponent = () => {
     return (
       <div>
@@ -21,7 +20,6 @@ const Routes = () => {
     )
   }
 
-  React.useEffect(() => {},[location])
 
   return (
       <PossoProvider permissions={permissionsOfApp} isAuthenticated={isAuthenticated()} notAuthenticatedRedirect={<Redirect to="/" />} authenticatedRedirect="/home">
