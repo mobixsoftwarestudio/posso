@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ForgotPassword: React.FC = () => {
+const ForgotPassword = () => {
   return (
     <div>
       <h2>ForgotPassword screen</h2>
