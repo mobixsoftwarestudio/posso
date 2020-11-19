@@ -53,7 +53,8 @@ export const PossoRoute: React.FC<Props> = ({
     if (Component) {
       return <Component {...props} />;
     }
-    return render;
+
+    return render?.(props);
   };
 
   const handleAuthenticationRedirect = (
