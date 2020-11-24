@@ -31,6 +31,7 @@ export const PossoRoute: React.FC<Props> = ({
   authorizationStrategy,
   notAllowedComponent,
   isPrivate,
+  redirectWhenAthenticated = true,
 }) => {
   const isAuthorized = useAuthorize(permissions, authorizationStrategy);
   const {
@@ -89,7 +90,7 @@ export const PossoRoute: React.FC<Props> = ({
         return handleNotAuthorized();
       }
 
-      if(!isPrivate) {
+      if(!isPrivate  && redirectWhenAthenticated) {
         return handleAuthenticationRedirect(props);
       }
 
@@ -97,10 +98,6 @@ export const PossoRoute: React.FC<Props> = ({
     }
 
     if (!isPrivate) {
-      if(isAuthenticated) {
-        return handleAuthenticationRedirect(props);
-      }
-
       return handleRenderComponent(props);
     }
 

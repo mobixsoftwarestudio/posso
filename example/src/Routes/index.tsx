@@ -25,7 +25,7 @@ const Routes = () => {
       <PossoProvider permissions={permissionsOfApp} isAuthenticated={isAuthenticated()} notAuthenticatedRedirect={<Redirect to="/" />} authenticatedRedirect="/home">
         <Switch>
           <PossoRoute exact path={'/'} component={Login} />
-          <PossoRoute exact path={'/forgot-password'} render={() => <ForgotPassword />} />
+          <PossoRoute exact path={'/forgot-password'} redirectWhenAthenticated={false} render={() => <ForgotPassword />} />
           <PossoRoute isPrivate exact path={'/home'} component={Home} permissions={['page/home']} />
           <PossoRoute isPrivate exact path={'/about'} component={About} permissions={['page/about']} notAllowedComponent={<NotAllowedComponent />} />
           <PossoRoute isPrivate exact path={'/contact'} component={Contact} permissions={['page/contact']} />
