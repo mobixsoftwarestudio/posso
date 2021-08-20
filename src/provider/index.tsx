@@ -14,11 +14,11 @@ type handleAuthenticationProps = {
   handleLogout: () => void
 }
 
-type handlePermissionsProps = {
-  handlePermissions: (permissions: string[]) => void
+type setPermissionsProps = {
+  setPermissions: (permissions: string[]) => void
 }
 
-type ContextProps = PossoProviderProps & handleAuthenticationProps & handlePermissionsProps;
+type ContextProps = PossoProviderProps & handleAuthenticationProps & setPermissionsProps;
 
 export const PossoContext = React.createContext<ContextProps>({
   permissions: [''],
@@ -32,7 +32,7 @@ export const PossoProvider: React.FC<PossoProviderProps> = ({
   ...rest
 }) => {
   const { authenticated, handleAuthentication, handleLogout } = useAuth(!!isAuthenticated);
-  const { permissions: permissionsState, handlePermissions } = usePermissions(permissions);
+  const { permissions: permissionsState, setPermissions } = usePermissions(permissions);
 
   return (
     <PossoContext.Provider value={{
@@ -41,7 +41,7 @@ export const PossoProvider: React.FC<PossoProviderProps> = ({
       permissions: permissionsState,
       handleAuthentication,
       handleLogout,
-      handlePermissions,
+      setPermissions,
     }}>
       {children}
     </PossoContext.Provider>

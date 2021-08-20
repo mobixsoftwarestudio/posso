@@ -12,14 +12,14 @@ const Routes = () => {
   const isAuthenticated = React.useCallback(() => localStorage.getItem('exampleToken') !== null, []);
   
   const NotAllowedComponent = () => {
-    const { handlePermissions } = usePosso();
+    const { setPermissions } = usePosso();
 
     return (
       <div>
         <h2>Not allowed page.</h2>
-        <button onClick={() => {handlePermissions(['page/home'])}}>Get Permission home</button>
-        <button onClick={() => {handlePermissions(['page/about'])}}>Get Permission about</button>
-        <button onClick={() => {handlePermissions(['page/contact'])}}>Get Permission contact</button>
+        <button onClick={() => {setPermissions(['page/home'])}}>Get Permission home</button>
+        <button onClick={() => {setPermissions(['page/about'])}}>Get Permission about</button>
+        <button onClick={() => {setPermissions(['page/contact'])}}>Get Permission contact</button>
       </div>
     )
   }

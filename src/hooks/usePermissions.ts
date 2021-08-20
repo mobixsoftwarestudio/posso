@@ -1,11 +1,7 @@
 import React from 'react';
 
-export const usePermissions = (permissionsInitiated: string[]) => {
-  const [permissions, setPermissions] = React.useState(permissionsInitiated);
+export const usePermissions = (initialPermissions: string[]) => {
+  const [permissions, setPermissions] = React.useState(initialPermissions);
 
-  const handlePermissions = (permissions: string[]) => {
-    setPermissions(permissions);
-  }
-
-  return ({ permissions, handlePermissions });
+  return ({ permissions, setPermissions });
 }

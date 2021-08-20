@@ -1,5 +1,4 @@
 import React from 'react';
-import { usePosso } from 'posso';
 
 const About: React.FC = () => {
   return (
