@@ -9,7 +9,7 @@ export const useAuthorize = (
     permissions,
     authorizationStrategy: providerStrategy,
   } = usePosso();
-
+    
   if (requirements.length === 0) {
     return true;
   }
