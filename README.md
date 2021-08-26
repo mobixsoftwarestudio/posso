@@ -139,6 +139,18 @@ The component accepts the following props:
 |**`permissions`**|string[]| It is used to say what permissions are required to view the component.
 |**`authorizationStrategy`**|func| authorizationStrategy used to define your own rule to check permissions.
 
+#### Hooks
+
+To manipulate the provider the following hooks are provided:
+
+`const { handleAuthentication, handleLogout, setPermissions} = usePosso();`
+
+|Name|Type|Description
+|:--:|:-----|:-----|
+|**`handleAuthentication`**|func| This hook is used to login the user.
+|**`handleLogout`**|func| This hook is used to log the user out.
+|**`setPermissions`**|func| This hook is used to modify user permissions.
+
 ## License
 Copyright (c) 2020 Mobix Software Studio.
 
